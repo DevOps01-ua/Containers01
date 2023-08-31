@@ -1,0 +1,21 @@
+version: '3'
+
+services:
+  web:
+    build: .
+    ports:
+      - "50800:5000"
+    environment:
+      - FLASK_ENV=development
+    depends_on:
+      - redis
+    networks:
+      - webnet
+
+  redis:
+    image: "redis:alpine"
+    networks:
+      - webnet
+
+networks:
+  webnet:
